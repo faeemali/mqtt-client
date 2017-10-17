@@ -20,171 +20,171 @@
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.fusesource.mqtt-client</groupId>
+        <artifactId>mqtt-client-project</artifactId>
+        <version>1.15-SNAPSHOT</version>
+    </parent>
+
     <groupId>org.fusesource.mqtt-client</groupId>
-    <artifactId>mqtt-client-project</artifactId>
+    <artifactId>mqtt-client</artifactId>
     <version>1.15-SNAPSHOT</version>
-  </parent>
-  
-  <groupId>org.fusesource.mqtt-client</groupId>
-  <artifactId>mqtt-client</artifactId>
-  <version>1.15-SNAPSHOT</version>
-  <packaging>bundle</packaging>
-  
-  <name>${project.artifactId}</name>
-  <description>
-     mqtt-client provides an ASL 2.0 licensed API to MQTT. It takes care of 
-     automatically reconnecting to your MQTT server and restoring your client 
-     session if any network failures occur. Applications can use a blocking 
-     API style, a futures based API, or a callback/continuations passing API 
-     style.
-  </description>
-  
-  <dependencies>
+    <packaging>bundle</packaging>
 
-    <dependency>
-      <groupId>org.fusesource.hawtdispatch</groupId>
-      <artifactId>hawtdispatch-transport</artifactId>
-      <version>${hawtdispatch-version}</version>
-    </dependency>
+    <name>${project.artifactId}</name>
+    <description>
+        mqtt-client provides an ASL 2.0 licensed API to MQTT. It takes care of 
+        automatically reconnecting to your MQTT server and restoring your client 
+        session if any network failures occur. Applications can use a blocking 
+        API style, a futures based API, or a callback/continuations passing API 
+        style.
+    </description>
 
-    <dependency>
-      <groupId>org.fusesource.hawtbuf</groupId>
-      <artifactId>hawtbuf</artifactId>
-      <version>${hawtbuf-version}</version>
-    </dependency>
+    <dependencies>
 
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>org.osgi.core</artifactId>
-      <version>${osgi-version}</version>
-      <optional>true</optional>
-    </dependency>
+        <dependency>
+            <groupId>org.fusesource.hawtdispatch</groupId>
+            <artifactId>hawtdispatch-transport</artifactId>
+            <version>${hawtdispatch-version}</version>
+        </dependency>
 
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>org.osgi.compendium</artifactId>
-      <version>${osgi-version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>asm</groupId>
-      <artifactId>asm-tree</artifactId>
-      <version>${asm-version}</version>
-      <optional>true</optional>
-    </dependency>
-    
-    <!-- Testing Dependencies -->
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>apollo-broker</artifactId>
-      <scope>test</scope>
-      <version>${apollo-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>apollo-mqtt</artifactId>
-      <version>${apollo-version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>apollo-leveldb</artifactId>
-      <version>${apollo-version}</version>
-      <scope>test</scope>
-    </dependency>
+        <dependency>
+            <groupId>org.fusesource.hawtbuf</groupId>
+            <artifactId>hawtbuf</artifactId>
+            <version>${hawtbuf-version}</version>
+        </dependency>
 
-    <!-- to enable the webconsole in the apollo broker -->
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>apollo-web</artifactId>
-      <version>${apollo-version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty.aggregate</groupId>
-      <artifactId>jetty-all-server</artifactId>
-      <version>7.1.6.v20100715</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-      <version>${junit-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${slf4j-version}</version>
-      <scope>test</scope>
-    </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>${osgi-version}</version>
+            <optional>true</optional>
+        </dependency>
 
-    
-  </dependencies>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>${osgi-version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm-tree</artifactId>
+            <version>${asm-version}</version>
+            <optional>true</optional>
+        </dependency>
 
-  <build>
-    <plugins>
-      <plugin>
-        
-        <groupId>com.github.wvengen</groupId>
-        <artifactId>proguard-maven-plugin</artifactId>
-        <version>2.0.5</version>
- 
-        <dependencies>
-           <dependency>
-               <groupId>net.sf.proguard</groupId>
-               <artifactId>proguard-base</artifactId>
-               <version>4.8</version>
-               <scope>runtime</scope>
-           </dependency>
-        </dependencies>
- 
-        <executions>
-           <execution>
-             <phase>package</phase>
-             <goals>
-                <goal>proguard</goal>
-             </goals>
-           </execution>
-        </executions>
-        <configuration>
-          <proguardVersion>4.8</proguardVersion>
-          <injar>${project.build.finalName}.jar</injar>
-          <outjar>${project.build.finalName}-uber.jar</outjar>          
-          <attach>true</attach>
-          <attachArtifactClassifier>uber</attachArtifactClassifier>
-          <libs>
-            <lib>${rt.jar.path}</lib>
-            <lib>${jsse.jar.path}</lib>
-          </libs>
-          <assembly>
-            <inclusions>
-              <inclusion>
-                <groupId>org.fusesource.hawtdispatch</groupId>
-                <artifactId>hawtdispatch-transport</artifactId>
-              </inclusion>
-              <inclusion>
-                <groupId>org.fusesource.hawtdispatch</groupId>
-                <artifactId>hawtdispatch</artifactId>
-              </inclusion>
-              <inclusion>
-                <groupId>org.fusesource.hawtbuf</groupId>
-                <artifactId>hawtbuf</artifactId>
-              </inclusion>
-            </inclusions>
-          </assembly>
-          <obfuscate>false</obfuscate>
-          <options>
-            <option>-dontoptimize</option>
-            <option>-keep class org.fusesource.mqtt.** { *; } </option>
-          </options>
-        </configuration>
-      </plugin>
+        <!-- Testing Dependencies -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>apollo-broker</artifactId>
+            <scope>test</scope>
+            <version>${apollo-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>apollo-mqtt</artifactId>
+            <version>${apollo-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>apollo-leveldb</artifactId>
+            <version>${apollo-version}</version>
+            <scope>test</scope>
+        </dependency>
 
-    </plugins>
-  </build>
-  
+        <!-- to enable the webconsole in the apollo broker -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>apollo-web</artifactId>
+            <version>${apollo-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.aggregate</groupId>
+            <artifactId>jetty-all-server</artifactId>
+            <version>7.1.6.v20100715</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+            <version>${junit-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j-version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.0.5</version>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>5.3</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <proguardVersion>5.3</proguardVersion>
+                    <injar>${project.build.finalName}.jar</injar>
+                    <outjar>${project.build.finalName}-uber.jar</outjar>          
+                    <attach>true</attach>
+                    <attachArtifactClassifier>uber</attachArtifactClassifier>
+                    <libs>
+                        <lib>${rt.jar.path}</lib>
+                        <lib>${jsse.jar.path}</lib>
+                    </libs>
+                    <assembly>
+                        <inclusions>
+                            <inclusion>
+                                <groupId>org.fusesource.hawtdispatch</groupId>
+                                <artifactId>hawtdispatch-transport</artifactId>
+                            </inclusion>
+                            <inclusion>
+                                <groupId>org.fusesource.hawtdispatch</groupId>
+                                <artifactId>hawtdispatch</artifactId>
+                            </inclusion>
+                            <inclusion>
+                                <groupId>org.fusesource.hawtbuf</groupId>
+                                <artifactId>hawtbuf</artifactId>
+                            </inclusion>
+                        </inclusions>
+                    </assembly>
+                    <obfuscate>false</obfuscate>
+                    <options>
+                        <option>-dontoptimize</option>
+                        <option>-keep class org.fusesource.mqtt.** { *; } </option>
+                    </options>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
 </project>
